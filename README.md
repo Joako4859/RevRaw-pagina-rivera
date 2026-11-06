@@ -1,4 +1,4 @@
-# RIVERA MEDIA - Portfolio
+# Portfolio de foto y video de autos
 
 Sitio de portfolio y servicios (React + Vite, API serverless en `/api`, Postgres).
 
