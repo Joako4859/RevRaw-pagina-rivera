@@ -1,4 +1,4 @@
-export const BRAND = "RIVERA MEDIA";
+export const BRAND = "RevRaw";
 export const CONTACT_EMAIL = "contacto@example.com"; // TODO: reemplazar
 export const WHATSAPP = "+000000000000"; // TODO: reemplazar
 
