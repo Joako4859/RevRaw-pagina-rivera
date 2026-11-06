@@ -10,7 +10,7 @@ vi.mock("pg", () => {
   return { default: { Pool }, Pool };
 });
 
-import handler from "./contact.js";
+import handler from "../api/contact.js";
 import { SERVICES } from "../src/config.js";
 
 const makeRes = () => {
