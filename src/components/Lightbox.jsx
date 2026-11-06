@@ -9,7 +9,7 @@ function LightboxImage({ work }) {
   );
 }
 
-export default function Lightbox({ work, onClose, onPrev, onNext }) {
+export default function Lightbox({ work, onClose, onPrev, onNext, direction = 0 }) {
   const closeRef = useRef(null);
   const rootRef = useRef(null);
 
@@ -54,7 +54,7 @@ export default function Lightbox({ work, onClose, onPrev, onNext }) {
   return (
     <div ref={rootRef} className="lightbox" role="dialog" aria-modal="true" aria-label={work.title}>
       <button className="lightbox__backdrop" onClick={onClose} aria-label="Cerrar" tabIndex={-1} />
-      <figure className="lightbox__figure" key={work.id}>
+      <figure className={`lightbox__figure${direction > 0 ? " from-next" : direction < 0 ? " from-prev" : ""}`} key={work.id}>
         <LightboxImage work={work} />
         <figcaption>{work.title}</figcaption>
       </figure>

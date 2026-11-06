@@ -1,5 +1,6 @@
 import { SERVICES } from "../config.js";
 import useReveal from "./useReveal.js";
+import TiltCard from "./TiltCard.jsx";
 
 export default function Services() {
   const [ref, visible] = useReveal();
@@ -10,11 +11,11 @@ export default function Services() {
         <h2 id="servicios-title">Servicios</h2>
         <ul className="cards">
           {SERVICES.map((s, i) => (
-            <li className="card" key={s.title}>
+            <TiltCard key={s.title} index={i}>
               <span className="card__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
-            </li>
+            </TiltCard>
           ))}
         </ul>
       </div>

@@ -71,34 +71,46 @@ export default function ContactForm() {
         <p className="eyebrow">Hablemos</p>
         <h2 id="contacto-title">Contacto</h2>
         {status === "sent" ? (
-          <p className="notice" role="status">
-            ¡Gracias! Tu mensaje fue enviado. Te respondemos a la brevedad.
-          </p>
+          <div className="notice notice--success" role="status">
+            <svg className="check" viewBox="0 0 52 52" width="44" height="44" aria-hidden="true" focusable="false">
+              <circle className="check__ring" cx="26" cy="26" r="23" pathLength="1" fill="none" />
+              <path className="check__tick" d="M15 27l8 8 15-17" pathLength="1" fill="none" />
+            </svg>
+            <p>¡Gracias! Tu mensaje fue enviado. Te respondemos a la brevedad.</p>
+          </div>
         ) : (
           <form onSubmit={onSubmit} noValidate>
             <div className="field">
               <label htmlFor="contact-name">Nombre</label>
-              <input type="text" maxLength={80} autoComplete="name" {...field("name")} />
+              <div className="field__control">
+                <input type="text" maxLength={80} autoComplete="name" {...field("name")} />
+              </div>
               {err("name")}
             </div>
             <div className="field">
               <label htmlFor="contact-email">Email</label>
-              <input type="email" autoComplete="email" {...field("email")} />
+              <div className="field__control">
+                <input type="email" autoComplete="email" {...field("email")} />
+              </div>
               {err("email")}
             </div>
             <div className="field">
               <label htmlFor="contact-service">Servicio</label>
-              <select {...field("service")}>
+              <div className="field__control">
+                <select {...field("service")}>
                 <option value="">Elegí un servicio</option>
                 {SERVICES.map((s) => (
                   <option key={s.title} value={s.title}>{s.title}</option>
                 ))}
               </select>
+              </div>
               {err("service")}
             </div>
             <div className="field">
               <label htmlFor="contact-message">Mensaje</label>
-              <textarea rows="5" maxLength={2000} {...field("message")} />
+              <div className="field__control">
+                <textarea rows="5" maxLength={2000} {...field("message")} />
+              </div>
               {err("message")}
             </div>
             {status === "error" && (
