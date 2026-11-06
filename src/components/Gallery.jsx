@@ -44,6 +44,7 @@ export default function Gallery({ works }) {
   const [openIndex, setOpenIndex] = useState(null);
   const [ref, visible] = useReveal();
   const items = filterWorks(works, category);
+  const tabs = [ALL_CATEGORY, ...CATEGORIES.filter((c) => works.some((w) => w.category === c))];
 
   const close = useCallback(() => setOpenIndex(null), []);
   const prev = useCallback(
@@ -66,7 +67,7 @@ export default function Gallery({ works }) {
         <p className="eyebrow">Portfolio</p>
         <h2 id="galeria-title">Galería</h2>
         <div className="tabs" role="tablist" aria-label="Categorías">
-          {[ALL_CATEGORY, ...CATEGORIES].map((c) => (
+          {tabs.map((c) => (
             <button
               key={c}
               role="tab"

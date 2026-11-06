@@ -5,21 +5,32 @@ import { works } from "../data/works.js";
 
 afterEach(cleanup);
 
+const fixture = [
+  { id: "a1", src: "/photos/a1.jpg", title: "Auto 1", category: "Autos", alt: "Auto uno" },
+  { id: "k1", src: "/photos/k1.jpg", title: "KTM 1", category: "KTM", alt: "KTM uno" },
+  { id: "a2", src: "/photos/a2.jpg", title: "Auto 2", category: "Autos", alt: "Auto dos" },
+];
+
 describe("Gallery", () => {
   it("filtra al clickear KTM", () => {
-    render(<Gallery works={works} />);
-    expect(screen.getAllByRole("img").length).toBe(works.length);
+    render(<Gallery works={fixture} />);
+    expect(screen.getAllByRole("img").length).toBe(fixture.length);
     fireEvent.click(screen.getByRole("tab", { name: "KTM" }));
-    const ktm = works.filter((w) => w.category === "KTM");
+    const ktm = fixture.filter((w) => w.category === "KTM");
     expect(screen.getAllByRole("img").length).toBe(ktm.length);
-    expect(screen.queryByAltText(works[0].alt)).toBeNull();
+    expect(screen.queryByAltText(fixture[0].alt)).toBeNull();
     expect(screen.getByAltText(ktm[0].alt)).toBeTruthy();
   });
 
-  it('muestra "Todavía no hay fotos en esta categoría" cuando está vacía', () => {
-    const onlyAutos = works.filter((w) => w.category === "Autos");
-    render(<Gallery works={onlyAutos} />);
-    fireEvent.click(screen.getByRole("tab", { name: "Eventos" }));
+  it("no muestra pestañas de categorías sin fotos", () => {
+    render(<Gallery works={works} />);
+    expect(screen.getAllByRole("tab").map((t) => t.textContent)).toEqual(["Todos", "Autos"]);
+    expect(screen.queryByRole("tab", { name: "KTM" })).toBeNull();
+    expect(screen.queryByRole("tab", { name: "Eventos" })).toBeNull();
+  });
+
+  it('muestra "Todavía no hay fotos en esta categoría" cuando no hay fotos', () => {
+    render(<Gallery works={[]} />);
     expect(screen.getByText("Todavía no hay fotos en esta categoría")).toBeTruthy();
   });
 });
