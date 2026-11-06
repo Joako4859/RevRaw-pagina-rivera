@@ -9,9 +9,11 @@ export default function Footer() {
         <p>
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
         </p>
-        <p>
-          <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        </p>
+        {wa && !/^0+$/.test(wa) && (
+          <p>
+            <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </p>
+        )}
       </div>
     </footer>
   );

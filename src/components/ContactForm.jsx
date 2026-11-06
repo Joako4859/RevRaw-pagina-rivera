@@ -78,7 +78,7 @@ export default function ContactForm() {
           <form onSubmit={onSubmit} noValidate>
             <div className="field">
               <label htmlFor="contact-name">Nombre</label>
-              <input type="text" autoComplete="name" {...field("name")} />
+              <input type="text" maxLength={80} autoComplete="name" {...field("name")} />
               {err("name")}
             </div>
             <div className="field">
@@ -98,7 +98,7 @@ export default function ContactForm() {
             </div>
             <div className="field">
               <label htmlFor="contact-message">Mensaje</label>
-              <textarea rows="5" {...field("message")} />
+              <textarea rows="5" maxLength={2000} {...field("message")} />
               {err("message")}
             </div>
             {status === "error" && (

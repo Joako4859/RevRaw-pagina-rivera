@@ -13,7 +13,7 @@ export default function Hero({ image }) {
         <p className="eyebrow hero__fade hero__fade--1">{BRAND}</p>
         <h1 id="hero-title" className="hero__fade hero__fade--2">Fotografía y video de autos</h1>
         <p className="hero__lead hero__fade hero__fade--3">
-          Autos, motos y eventos contados con imagen cuidada, desde Neuquén.
+          Autos, motos y eventos contados con una imagen cuidada.
         </p>
         <a className="btn hero__fade hero__fade--4" href="#contacto">Pedí tu sesión</a>
       </div>

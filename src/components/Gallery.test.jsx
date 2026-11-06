@@ -23,3 +23,13 @@ describe("Gallery", () => {
     expect(screen.getByText("Todavía no hay fotos en esta categoría")).toBeTruthy();
   });
 });
+
+describe("Gallery placeholder", () => {
+  it("muestra Foto próximamente cuando la imagen falla", () => {
+    render(<Gallery works={works} />);
+    expect(screen.queryByText("Foto próximamente")).toBeNull();
+    fireEvent.error(screen.getByAltText(works[0].alt));
+    expect(screen.getAllByText("Foto próximamente").length).toBe(1);
+    expect(screen.getByText(works[0].title)).toBeTruthy();
+  });
+});

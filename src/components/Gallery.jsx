@@ -1,21 +1,35 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { CATEGORIES } from "../config.js";
 import { ALL_CATEGORY, filterWorks } from "../lib/filterWorks.js";
 import Lightbox from "./Lightbox.jsx";
 import useReveal from "./useReveal.js";
 
 function Thumb({ work, onOpen }) {
-  const [failed, setFailed] = useState(false);
+  const [state, setState] = useState("loading"); // loading | loaded | failed
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth > 0) setState("loaded");
+  }, []);
+
   return (
     <li className="gallery__item">
       <button className="gallery__open" onClick={onOpen} aria-label={`Ver ${work.title}`}>
         <img
+          ref={imgRef}
           src={work.src}
           alt={work.alt}
           loading="lazy"
-          className={failed ? "is-broken" : undefined}
-          onError={() => setFailed(true)}
+          className={state === "loaded" ? "is-loaded" : "is-pending"}
+          onLoad={() => setState("loaded")}
+          onError={() => setState("failed")}
         />
+        {state !== "loaded" && (
+          <span className="gallery__placeholder" aria-hidden="true">
+            {state === "failed" ? "Foto próximamente" : ""}
+          </span>
+        )}
         <span className="gallery__caption">
           <span>{work.title}</span>
           <small>{work.category}</small>
